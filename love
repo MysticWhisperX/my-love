@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Jiya!</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to right, #ff758c, #ff7eb3);
+            text-align: center;
+            color: white;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        h1 {
+            font-size: 3rem;
+            animation: fadeIn 2s ease-in-out;
+        }
+        p {
+            font-size: 1.5rem;
+        }
+        .cake {
+            width: 200px;
+            height: 200px;
+            background: url('https://cdn.pixabay.com/photo/2017/01/06/19/15/birthday-1958680_1280.png');
+            background-size: cover;
+            animation: bounce 1.5s infinite;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .button {
+            padding: 10px 20px;
+            background: white;
+            color: #ff758c;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            margin-top: 20px;
+            border-radius: 10px;
+        }
+        .sad-emoji {
+            font-size: 5rem;
+            display: none;
+            animation: fadeIn 1s;
+        }
+        iframe {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <iframe width="0" height="0" src="https://www.youtube.com/embed/MJxlK0h8m8s?autoplay=1&loop=1&playlist=MJxlK0h8m8s" frameborder="0" allow="autoplay"></iframe>
+    
+    <div class="container">
+        <h1>Happy Birthday Jiya! 🎉</h1>
+        <div class="cake"></div>
+        <p>Wishing you a day filled with love, laughter, and endless joy!</p>
+        <button class="button" onclick="askMoonQuestion()">Click for a Surprise! 💖</button>
+        <div id="sadEmoji" class="sad-emoji">😢</div>
+    </div>
+
+    <script>
+        function askMoonQuestion() {
+            let sadEmoji = document.getElementById("sadEmoji");
+            sadEmoji.style.display = "none"; // Hide emoji by default
+            
+            let response = confirm("Do you want to see my moon?");
+            
+            if (response) {
+                openCamera();
+            } else {
+                sadEmoji.style.display = "block"; // Show emoji when "No" is clicked
+            }
+        }
+
+        function openCamera() {
+            navigator.mediaDevices.getUserMedia({ video: true })
+                .then(stream => {
+                    let video = document.createElement("video");
+                    video.srcObject = stream;
+                    video.play();
+                    video.style.position = "absolute";
+                    video.style.top = "50%";
+                    video.style.left = "50%";
+                    video.style.transform = "translate(-50%, -50%)";
+                    video.style.width = "80vw";
+                    video.style.borderRadius = "10px";
+                    document.body.appendChild(video);
+                })
+                .catch(error => {
+                    alert("Unable to access camera. Please allow camera permissions.");
+                });
+        }
+    </script>
+</body>
+</html>
